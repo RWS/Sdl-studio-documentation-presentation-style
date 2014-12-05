@@ -11,6 +11,7 @@
 // their Copy to Output Folder property to "Copy if newer".
 //
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -30,9 +31,9 @@ namespace Studio.PresentationStyle
     /// for a common presentation style.  Presentation styles are singletons in nature.  The composition
     /// container will create instances as needed and will dispose of them when the container is disposed
     /// of.</remarks>
-    [PresentationStyleExport("Studio.PresentationStyle", "Studio.PresentationStyle", Version = AssemblyInfo.ProductVersion,
-      Copyright = AssemblyInfo.Copyright, Description = "Studio.PresentationStyle custom presentation style")]
-    public sealed class Studio.PresentationStylePresentationStyle : PresentationStyleSettings
+    [PresentationStyleExport("Studio.PresentationStyle", "SDL Studio documentation presentation style", Version = AssemblyInfo.ProductVersion,
+      Copyright = AssemblyInfo.Copyright, Description = "Custom sandcastle presentation style for SDL Trados Studio")]
+    public sealed class StudioPresentationStylePresentationStyle : PresentationStyleSettings
     {
         /// <inheritdoc />
         public override string Location
@@ -43,18 +44,17 @@ namespace Studio.PresentationStyle
         /// <summary>
         /// Constructor
         /// </summary>
-        public Studio.PresentationStylePresentationStyle()
+        public StudioPresentationStylePresentationStyle()
         {
             // The base path of the presentation style files relative to the assembly's location.  If your
             // assembly will reside in the same folder as the presentation style content, you can remove this
             // property setting.  If adding multiple presentation styles to the assembly, set this to the name
             // of the subfolder that contains the presentation style content folders.
-            this.BasePath = "Studio.PresentationStyle";
+          //  this.BasePath = "Studio.PresentationStyle";
 
             // TODO: Adjust the rest of these properties as needed.
 
-            this.SupportedFormats = HelpFileFormats.HtmlHelp1 | HelpFileFormats.MSHelp2 |
-                HelpFileFormats.MSHelpViewer | HelpFileFormats.Website;
+            this.SupportedFormats = HelpFileFormats.Website;
 
             this.SupportsNamespaceGrouping = this.SupportsCodeSnippetGrouping = true;
 
@@ -82,11 +82,10 @@ namespace Studio.PresentationStyle
             this.ContentFiles.Add(new ContentFiles(this.SupportedFormats, @"icons\*.*"));
             this.ContentFiles.Add(new ContentFiles(this.SupportedFormats, @"scripts\*.*"));
             this.ContentFiles.Add(new ContentFiles(this.SupportedFormats, @"styles\*.*"));
-
-            // By default, this will use the standard web file content from the Sandcastle Help File Builder
-            this.ContentFiles.Add(new ContentFiles(HelpFileFormats.Website, null, @"..\LegacyWeb\*.*",
+            this.ContentFiles.Add(new ContentFiles(HelpFileFormats.Website, null, @"Web\*.*",
                 String.Empty, new[] { ".aspx", ".html", ".htm", ".php" }));
 
+            // Define the transform component arguments
             this.TransformComponentArguments.Add(new TransformComponentArgument("logoFile", true, true, null,
                 "An optional logo file to insert into the topic headers.  Specify the filename only, omit " +
                 "the path.  Place the file in your project in an icons\\ folder and set the Build Action to " +
@@ -114,8 +113,8 @@ namespace Studio.PresentationStyle
                 "text.  This should be set to cs, vb, cpp, fs, or the keyword style parameter value of a " +
                 "third-party syntax generator if you want to use a non-standard language as the default."));
 
-            // Add plug-in dependencies if any
-            //this.PlugInDependencies.Add(new PlugInDependency("Lightweight Website Style", null));
+            // Add the plug-in dependencies
+            this.PlugInDependencies.Add(new PlugInDependency("Lightweight Website Style", null));
         }
     }
 }
