@@ -52,7 +52,13 @@ var community = function () {
     function getNamespace() {
         var raw = $(".seeAlsoStyle:contains('Namespace')").text();
         var elements = raw.split(' ');
-        if (elements.length == 0 || elements[0] == '') return '';
+        if (elements.length == 0 || elements[0] == '') {
+            //look at class name and see if we are actually on the namespace
+            var raw = $('title').text();
+            if (raw.indexOf('Namespace') == -1) return '';
+            var namespace = raw.replace('Namespace', '').trim();
+            return namespace;
+        }
 
         return elements[0];
     };
@@ -62,9 +68,9 @@ var community = function () {
     };
 
     function ensureClassName(className) {
+
         var elements = className.split('.');
         if (elements.length == 0 || elements[0] == '') return '';
-
         return elements[0];
     }
 
@@ -77,6 +83,7 @@ var community = function () {
         var className = '';
         var type = '';
         var raw = $('title').text();
+
         var elements = raw.split(' ');
         if (elements.length == 0) return '';
         if (elements.length == 1) {
@@ -87,8 +94,9 @@ var community = function () {
             type = elements[1];
         }
 
+        //if the type is namespace it means we are on a namespace page and we don't have a class
         return {
-            className: ensureClassName(className),
+            className: (type.indexOf('Namespace') > -1) ? '' : ensureClassName(className),
             fileName: ensureFileName(className, type)
         }
     }
@@ -118,7 +126,7 @@ var community = function () {
             githubCommunityRepository += '/' + namespace;
         }
         if (className != '') {
-            githubCommunityRepository += '/' + fileName;
+            githubCommunityRepository += '/' + className;
         }
 
         if (action == 'edit') {
