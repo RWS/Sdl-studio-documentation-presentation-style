@@ -110,6 +110,9 @@
 						<xsl:apply-templates select="topic"/>
 
 						<xsl:call-template name="t_writeChangeHistorySection"/>
+
+            <xsl:call-template name="t_community"/>
+            <xsl:call-template name="t_comments"/>
 					</div>
 				</div>
 				<div id="pageFooter" class="pageFooter">

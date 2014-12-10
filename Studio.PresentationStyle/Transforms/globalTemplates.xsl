@@ -592,6 +592,49 @@
 		<xsl:copy-of select="$p_content" />
 	</xsl:template>
 
+  <xsl:template name="t_community">
+    <xsl:call-template name="t_putSectionInclude">
+      <xsl:with-param name="p_titleInclude" select="'title_community'"/>
+      <xsl:with-param name="p_id" select="'community'"/>
+      <xsl:with-param name="p_content">
+        <div>
+          <div style="display:inline;float:right">
+            <a id="community_edit" href="" target="_blank" class="btn">Edit</a>
+          </div>
+          <div id="community_content">
+            Be the first to <a id="community_edit" href="" target="_blank">Edit</a> the community content of this topic.
+          </div>
+        </div>
+
+      </xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>
+
+
+  <xsl:template name="t_comments">
+    <xsl:call-template name="t_putSectionInclude">
+      <xsl:with-param name="p_titleInclude" select="'title_comments'"/>
+      <xsl:with-param name="p_id" select="'commnets'"/>
+      <xsl:with-param name="p_content">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+          var disqus_shortname = 'sdlstudiodocumentation'; // required: replace example with your forum shortname
+
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>
+          Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>
+
 	<!-- ============================================================================================
 	Alerts
 	============================================================================================= -->
