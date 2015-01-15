@@ -23,8 +23,8 @@ using System.Runtime.InteropServices;
 // Resources contained within the assembly are English
 [assembly: NeutralResourcesLanguageAttribute("en")]
 
-[assembly: AssemblyVersion("1.0.1.0")]
-[assembly: AssemblyFileVersion("1.0.1.0")]
+[assembly: AssemblyVersion("0.1.2.0")]
+[assembly: AssemblyFileVersion("0.1.2.0")]
 
 // This defines constants that can be used here and in the custom presentation style export attribute
 internal static partial class AssemblyInfo

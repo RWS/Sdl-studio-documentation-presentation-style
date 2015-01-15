@@ -5,7 +5,7 @@
 AppName=SDL Studio Documentation Presentation Style
 AppPublisher=SDL Community Developers
 AppPublisherURL=https://community.sdl.com/
-AppVersion=0.1.1.0
+AppVersion=0.1.2.0
 DisableDirPage = yes
 DisableWelcomePage = yes
 AllowNoIcons = yes
