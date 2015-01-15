@@ -601,6 +601,7 @@
           <div style="display:inline;float:right">
             <a id="community_edit" href="" target="_blank" class="btn">Edit</a>
           </div>
+          <div style="clear:both"></div>
           <div id="community_content">
             Be the first to <a id="community_edit" href="" target="_blank">Edit</a> the community content of this topic.
           </div>

@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Studio.PresentationStyle")]
 [assembly: AssemblyDescription("A custom presentation style for Sandcastle")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyCopyright(AssemblyInfo.Copyright)]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyCulture("")]
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
@@ -23,9 +23,8 @@ using System.Runtime.InteropServices;
 // Resources contained within the assembly are English
 [assembly: NeutralResourcesLanguageAttribute("en")]
 
-[assembly: AssemblyVersion(AssemblyInfo.ProductVersion)]
-[assembly: AssemblyFileVersion(AssemblyInfo.ProductVersion)]
-[assembly: AssemblyInformationalVersion(AssemblyInfo.ProductVersion)]
+[assembly: AssemblyVersion("1.0.1.0")]
+[assembly: AssemblyFileVersion("1.0.1.0")]
 
 // This defines constants that can be used here and in the custom presentation style export attribute
 internal static partial class AssemblyInfo
