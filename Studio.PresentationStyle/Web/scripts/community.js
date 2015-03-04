@@ -132,7 +132,7 @@ var community = function () {
         if (action == 'edit') {
             githubCommunityRepository += '/' + fileName + '.md';
         } else {
-            githubCommunityRepository += '?filename=' + fileName + '.md';
+            githubCommunityRepository += '/new?filename=' + fileName + '.md';
         }
 
         return githubCommunityRepository;
