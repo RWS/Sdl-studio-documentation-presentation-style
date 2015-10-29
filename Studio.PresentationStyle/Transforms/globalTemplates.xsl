@@ -591,7 +591,7 @@
 		</h4>
 		<xsl:copy-of select="$p_content" />
 	</xsl:template>
-
+  
   <xsl:template name="t_community">
     <xsl:call-template name="t_putSectionInclude">
       <xsl:with-param name="p_titleInclude" select="'title_community'"/>
@@ -601,12 +601,10 @@
           <div style="display:inline;float:right">
             <a id="community_edit" href="" target="_blank" class="btn">Edit</a>
           </div>
-          <div style="clear:both"></div>
-          <div id="community_content">
-            Be the first to <a id="community_edit" href="" target="_blank">Edit</a> the community content of this topic.
-          </div>
+          <br/>
+          <!--<div style="clear:both"></div>-->
+          <div id="community_content">Be the first to <a id="community_edit" href="" target="_blank">Edit</a> the community content of this topic.</div>
         </div>
-
       </xsl:with-param>
     </xsl:call-template>
   </xsl:template>

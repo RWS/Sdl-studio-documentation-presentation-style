@@ -101,7 +101,7 @@
 
 						<include item="header"/>
 
-						<xsl:call-template name="t_writeFreshnessDate">
+            <xsl:call-template name="t_writeFreshnessDate">
 							<xsl:with-param name="p_changedHistoryDate"
 															select="/document/topic/*//ddue:section[ddue:title = 'Change History']/ddue:content/ddue:table/ddue:row[1]/ddue:entry[1] |
                     /document/topic/*/ddue:changeHistory/ddue:content/ddue:table/ddue:row[1]/ddue:entry[1]"/>
@@ -112,7 +112,9 @@
 						<xsl:call-template name="t_writeChangeHistorySection"/>
 
             <xsl:call-template name="t_community"/>
+
             <xsl:call-template name="t_comments"/>
+            
 					</div>
 				</div>
 				<div id="pageFooter" class="pageFooter">

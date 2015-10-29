@@ -28,7 +28,8 @@
 	<xsl:variable name="g_abstractSummary" select="/document/comments/summary"/>
 	<xsl:variable name="g_hasSeeAlsoSection"
 		select="boolean((count(/document/comments//seealso[not(ancestor::overloads)] |
-		/document/comments/conceptualLink | /document/reference/elements/element/overloads//seealso) > 0) or
+		/document/comments/conceptualLink | /document/reference/elements/element/overloads//seealso |
+		/document/reference/elements/element/overloads/conceptualLink) > 0) or
 		($g_apiTopicGroup='type' or $g_apiTopicGroup='member' or $g_apiTopicGroup='list'))"/>
 	<xsl:variable name="g_hasReferenceLinks"
 		select="boolean((count(/document/comments//seealso[not(ancestor::overloads) and not(@href)] |
@@ -36,7 +37,8 @@
 		($g_apiTopicGroup='type' or $g_apiTopicGroup='member' or $g_apiTopicGroup='list'))"/>
 	<xsl:variable name="g_hasOtherResourcesLinks"
 		select="boolean((count(/document/comments//seealso[not(ancestor::overloads) and @href] |
-		/document/comments/conceptualLink | /document/reference/elements/element/overloads//seealso[@href]) > 0))"/>
+		/document/comments/conceptualLink | /document/reference/elements/element/overloads//seealso[@href] |
+		/document/reference/elements/element/overloads/conceptualLink) > 0))"/>
 
 	<!-- ============================================================================================
 	Body
@@ -142,7 +144,7 @@
 		</xsl:if>
 
     <xsl:call-template name="t_community"/>
-    
+
     <xsl:call-template name="t_comments"/>
 
 	</xsl:template>
@@ -731,7 +733,7 @@
 																select="$v_ensuresOnThrow"/>
 							</xsl:call-template>
 						</xsl:if>
-						<xsl:if test="$v_invariants">f
+						<xsl:if test="$v_invariants">
 							<xsl:call-template name="t_contractsTable">
 								<xsl:with-param name="p_title">
 									<include item="header_invariantsName"/>
@@ -775,8 +777,7 @@
 							<pre xml:space="preserve" style="margin-bottom: 0pt"><xsl:value-of select="."/></pre>
 						</div>
 						<xsl:if test="@description or @inheritedFrom or @exception">
-							<div style="font-size:95%; margin-left: 10pt;
-                        margin-bottom: 0pt">
+							<div style="font-size:95%; margin-left: 10pt; margin-bottom: 0pt">
 								<table>
 									<colgroup>
 										<col width="10%"/>
@@ -798,7 +799,30 @@
 												<em><xsl:text>Inherited From: </xsl:text></em>
 											</td>
 											<td style="border-bottom: 0px none;">
-												<referenceLink target="{@inheritedFrom}">
+												<!-- Change the ID type and strip "get_" and "set_" prefixes from property member IDs -->
+												<xsl:variable name="inheritedMemberId">
+													<xsl:choose>
+														<xsl:when test="contains(@inheritedFrom, '.get_')">
+															<xsl:value-of select="concat('P:', substring-before(substring(@inheritedFrom, 3), '.get_'), '.', substring-after(@inheritedFrom, '.get_'))"/>
+														</xsl:when>
+														<xsl:when test="contains(@inheritedFrom, '.set_')">
+															<!-- For the setter, we need to strip the last parameter too -->
+															<xsl:variable name="lastParam">
+																<xsl:call-template name="t_getLastParameter">
+																	<xsl:with-param name="p_string" select="@inheritedFrom" />
+																</xsl:call-template>
+															</xsl:variable>
+															<xsl:variable name="setterName">
+																<xsl:value-of select="concat('P:', substring-before(substring(@inheritedFrom, 3), '.set_'), '.', substring-after(@inheritedFrom, '.set_'))"/>
+															</xsl:variable>
+															<xsl:value-of select="concat(substring-before($setterName, $lastParam), ')')"/>
+														</xsl:when>
+														<xsl:otherwise>
+															<xsl:value-of select="@inheritedFrom"/>
+														</xsl:otherwise>
+													</xsl:choose>
+												</xsl:variable>
+												<referenceLink target="{$inheritedMemberId}">
 													<xsl:value-of select="@inheritedFromTypeName"/>
 												</referenceLink>
 											</td>
@@ -823,6 +847,21 @@
 		</table>
 	</xsl:template>
 
+	<!-- Gets the parameter following the last comma in the given string -->
+	<xsl:template name="t_getLastParameter">
+		<xsl:param name="p_string" />
+		<xsl:choose>
+			<xsl:when test="contains($p_string, ',')">
+				<xsl:call-template name="t_getLastParameter">
+					<xsl:with-param name="p_string" select="substring-after($p_string, ',')" />
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="concat(',', $p_string)" />
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
 	<!-- ======================================================================================== -->
 
 	<xsl:template name="t_putSeeAlsoSection">
@@ -841,8 +880,7 @@
 								<xsl:for-each select="/document/comments//seealso[not(ancestor::overloads) and not(@href)] | /document/reference/elements/element/overloads//seealso[not(@href)]">
 									<div class="seeAlsoStyle">
 										<xsl:apply-templates select=".">
-											<xsl:with-param name="displaySeeAlso"
-																			select="true()"/>
+											<xsl:with-param name="displaySeeAlso" select="true()"/>
 										</xsl:apply-templates>
 									</div>
 								</xsl:for-each>
@@ -858,13 +896,12 @@
 								<xsl:for-each select="/document/comments//seealso[not(ancestor::overloads) and @href] | /document/reference/elements/element/overloads//seealso[@href]">
 									<div class="seeAlsoStyle">
 										<xsl:apply-templates select=".">
-											<xsl:with-param name="displaySeeAlso"
-																			select="true()"/>
+											<xsl:with-param name="displaySeeAlso" select="true()"/>
 										</xsl:apply-templates>
 									</div>
 								</xsl:for-each>
 								<!-- Copy conceptualLink elements as-is -->
-								<xsl:for-each select="/document/comments/conceptualLink">
+								<xsl:for-each select="/document/comments/conceptualLink | /document/reference/elements/element/overloads/conceptualLink">
 									<div class="seeAlsoStyle">
 										<xsl:copy-of select="."/>
 									</div>
@@ -1176,14 +1213,6 @@
 	<xsl:template match="note" name="t_note">
 		<xsl:call-template name="t_putAlert">
 			<xsl:with-param name="p_alertClass" select="@type"/>
-		</xsl:call-template>
-	</xsl:template>
-
-	<!-- ======================================================================================== -->
-
-	<xsl:template name="t_codelangAttributes">
-		<xsl:call-template name="t_mshelpCodelangAttributes">
-			<xsl:with-param name="snippets" select="/document/comments/example//code"/>
 		</xsl:call-template>
 	</xsl:template>
 

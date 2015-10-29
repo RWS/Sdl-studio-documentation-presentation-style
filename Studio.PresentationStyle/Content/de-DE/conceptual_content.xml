@@ -15,7 +15,7 @@
 	<item id="title_relatedTopics">Siehe auch</item>
   <item id="title_community">Community</item>
   <item id="title_comments">Comments</item>
-  <item id="title_syntax">Syntax</item>
+	<item id="title_syntax">Syntax</item>
 	<item id="title_parameters">Parameter</item>
 	<item id="title_returnValue">Rückgabewert</item>
   <item id="title_attributesAndElements">Attribute und Elemente</item>
@@ -39,8 +39,8 @@
   <item id="title_example">Beispiel</item>
 
   <!-- autoOutline boilerplate -->
-  <item id="boilerplate_autoOutlineTopLevelIntro">Dieses Thema enthält die folgenden Abschnitte.</item>
-	<item id="boilerplate_autoOutlineSubsectionIntro">Dieser Abschnitt enthält die folgenden Unterabschnitte.</item>
+  <item id="boilerplate_autoOutlineTopLevelIntro">Dieses Thema enthält die folgenden Abschnitte:</item>
+	<item id="boilerplate_autoOutlineSubsectionIntro">Dieser Abschnitt enthält die folgenden Unterabschnitte:</item>
 
   <!-- resolve the autoOutline token -->
   <item id="autoOutline">

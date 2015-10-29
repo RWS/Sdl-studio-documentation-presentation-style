@@ -170,12 +170,12 @@
   <item id="header_ensuresName">Ensures</item>
   <item id="header_ensuresOnThrowName">EnsuresOnThrow</item>
   <item id="header_invariantsName">Invariants</item>
- 
+
 	<item id="header_revHistoryDate">Date</item>
 	<item id="header_revHistoryVersion">Version</item>
 	<item id="header_revHistoryDescription">Description</item>
 
-	<!-- member list table titles -->
+  <!-- member list table titles -->
   <item id="tableTitle_namespace">Namespaces</item>
 	<item id="tableTitle_class">Classes</item>
 	<item id="tableTitle_structure">Structures</item>
@@ -365,6 +365,15 @@
   <item id="supportedIn_5">Supported in: {0}, {1}, {2}, {3}, {4}</item>
   <item id="supportedIn_6">Supported in: {0}, {1}, {2}, {3}, {4}, {5}</item>
   <item id="supportedIn_7">Supported in: {0}, {1}, {2}, {3}, {4}, {5}, {6}</item>
+  <item id="supportedIn_8">Supported in: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}</item>
+  <item id="supportedIn_9">Supported in: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}</item>
+  <item id="supportedIn_10">Supported in: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}</item>
+  <item id="supportedIn_11">Supported in: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}</item>
+  <item id="supportedIn_12">Supported in: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}</item>
+  <item id="supportedIn_13">Supported in: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}</item>
+  <item id="supportedIn_14">Supported in: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}</item>
+  <item id="supportedIn_15">Supported in: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}</item>
+  <item id="supportedIn_16">Supported in: {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}</item>
   <item id="obsoleteWarning">Obsolete (compiler warning) in {0}</item>
   <item id="obsoleteError">Obsolete (does not compile) in {0} and later</item>
   	
